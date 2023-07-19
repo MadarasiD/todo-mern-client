@@ -14,7 +14,7 @@ function App() {
 
   const fetchTodos = () => {
     axios
-      .get('/api/todos')
+      .get('https://todo-app-api-aya2.onrender.com/api/todos')
       .then((response) => {
         setTodos(response.data);
       })
