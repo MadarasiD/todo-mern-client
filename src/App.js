@@ -14,7 +14,7 @@ function App() {
 
   const fetchTodos = () => {
     axios
-      .get('http://localhost:5000/api/todos') // Módosított sor
+      .get('https://todo-app-api-aya2.onrender.com/api/todos') // Módosított sor
       .then((response) => {
         setTodos(response.data);
       })
@@ -31,7 +31,7 @@ function App() {
     event.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/todos', { title: newTodoTitle })
+      .post('https://todo-app-api-aya2.onrender.com/api/todos', { title: newTodoTitle })
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodoTitle('');
@@ -47,7 +47,7 @@ function App() {
 
   const handleTodoUpdate = () => {
     axios
-      .put(`http://localhost:5000/api/todos/${selectedTodo._id}`, {
+      .put(`https://todo-app-api-aya2.onrender.com/api/todos/${selectedTodo._id}`, {
         title: selectedTodo.title,
         completed: selectedTodo.completed
       })
