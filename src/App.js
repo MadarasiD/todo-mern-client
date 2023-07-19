@@ -14,7 +14,7 @@ function App() {
 
   const fetchTodos = () => {
     axios
-      .get('https://todo-app-api-aya2.onrender.com/api/todos') // Módosított sor
+      .get('https://todo-app-api-aya2.onrender.com/api/todos')
       .then((response) => {
         setTodos(response.data);
       })
@@ -30,7 +30,7 @@ function App() {
   const handleNewTodoSubmit = event => {
     event.preventDefault();
 
-    axios
+   axios
       .post('https://todo-app-api-aya2.onrender.com/api/todos', { title: newTodoTitle })
       .then(response => {
         setTodos([...todos, response.data]);
@@ -46,7 +46,7 @@ function App() {
   };
 
   const handleTodoUpdate = () => {
-    axios
+      axios
       .put(`https://todo-app-api-aya2.onrender.com/api/todos/${selectedTodo._id}`, {
         title: selectedTodo.title,
         completed: selectedTodo.completed
@@ -61,14 +61,14 @@ function App() {
   };
 
   const handleTodoDelete = todo => {
-    axios
-      .delete(`/api/todos/${todo._id}`)
-      .then(response => {
-        fetchTodos();
-      })
-      .catch(error => {
-        console.error('Hiba történt a ToDo törlésekor:', error);
-      });
+   axios
+    .delete(`https://todo-app-api-aya2.onrender.com/api/todos/${todo._id}`)
+    .then(response => {
+      fetchTodos();
+    })
+    .catch(error => {
+      console.error('Hiba történt a ToDo törlésekor:', error);
+    });
   };
 
   const handleTodoCancel = () => {
