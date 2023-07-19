@@ -14,7 +14,7 @@ function App() {
 
   const fetchTodos = () => {
     axios
-      .get('https://todo-app-api-aya2.onrender.com/api/todos')
+      .get('/api/todos')
       .then((response) => {
         setTodos(response.data);
       })
@@ -31,7 +31,7 @@ function App() {
     event.preventDefault();
 
    axios
-      .post('https://todo-app-api-aya2.onrender.com/api/todos', { title: newTodoTitle })
+      .post('/api/todos', { title: newTodoTitle })
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodoTitle('');
@@ -47,7 +47,7 @@ function App() {
 
   const handleTodoUpdate = () => {
       axios
-      .put(`https://todo-app-api-aya2.onrender.com/api/todos/${selectedTodo._id}`, {
+      .put(`/api/todos/${selectedTodo._id}`, {
         title: selectedTodo.title,
         completed: selectedTodo.completed
       })
@@ -62,7 +62,7 @@ function App() {
 
   const handleTodoDelete = todo => {
    axios
-    .delete(`https://todo-app-api-aya2.onrender.com/api/todos/${todo._id}`)
+    .delete(`/api/todos/${todo._id}`)
     .then(response => {
       fetchTodos();
     })
