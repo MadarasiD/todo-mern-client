@@ -30,7 +30,7 @@ function App() {
   const handleNewTodoSubmit = event => {
     event.preventDefault();
 
-   axios
+    axios
       .post('https://todo-app-api-aya2.onrender.com/api/todos', { title: newTodoTitle })
       .then(response => {
         setTodos([...todos, response.data]);
@@ -42,11 +42,11 @@ function App() {
   };
 
   const handleTodoEdit = todo => {
-    setSelectedTodo({...todo});
+    setSelectedTodo({ ...todo });
   };
 
   const handleTodoUpdate = () => {
-      axios
+    axios
       .put(`https://todo-app-api-aya2.onrender.com/api/todos/${selectedTodo._id}`, {
         title: selectedTodo.title,
         completed: selectedTodo.completed
@@ -61,14 +61,14 @@ function App() {
   };
 
   const handleTodoDelete = todo => {
-   axios
-    .delete(`https://todo-app-api-aya2.onrender.com/api/todos/${todo._id}`)
-    .then(response => {
-      fetchTodos();
-    })
-    .catch(error => {
-      console.error('Hiba történt a ToDo törlésekor:', error);
-    });
+    axios
+      .delete(`https://todo-app-api-aya2.onrender.com/api/todos/${todo._id}`)
+      .then(response => {
+        fetchTodos();
+      })
+      .catch(error => {
+        console.error('Hiba történt a ToDo törlésekor:', error);
+      });
   };
 
   const handleTodoCancel = () => {
@@ -91,48 +91,51 @@ function App() {
             Hozzáadás
           </button>
         </form>
-        <ul className="list-group">
+        <div className="row">
           {todos.map(todo => (
-            <li className="list-group-item d-flex justify-content-between align-items-center mb-2" key={todo._id}>
-              {selectedTodo && selectedTodo._id === todo._id ? (
-                <>
-                  <input
-                    type="text"
-                    className="form-control me-2"
-                    style={{width: '70%'}}
-                    value={selectedTodo.title}
-                    onChange={event =>
-                      setSelectedTodo({
-                        ...selectedTodo,
-                        title: event.target.value
-                      })
-                    }
-                  />
-                  <div>
-                    <button className="btn btn-success me-2" onClick={handleTodoUpdate}>
-                      Mentés
-                    </button>
-                    <button className="btn btn-secondary" onClick={handleTodoCancel}>
-                      Mégse
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <span>{todo.title}</span>
-                  <div>
-                    <button className="btn btn-primary me-2" onClick={() => handleTodoEdit(todo)}>
-                      Szerkesztés
-                    </button>
-                    <button className="btn btn-danger" onClick={() => handleTodoDelete(todo)}>
-                      Törlés
-                    </button>
-                  </div>
-                </>
-              )}
-            </li>
+            <div className="col-lg-4" key={todo._id}>
+              <div className="card mb-4">
+                <div className="card-body">
+                  {selectedTodo && selectedTodo._id === todo._id ? (
+                    <>
+                      <input
+                        type="text"
+                        className="form-control mb-2"
+                        value={selectedTodo.title}
+                        onChange={event =>
+                          setSelectedTodo({
+                            ...selectedTodo,
+                            title: event.target.value
+                          })
+                        }
+                      />
+                      <div className="text-end">
+                        <button className="btn btn-success me-2" onClick={handleTodoUpdate}>
+                          Mentés
+                        </button>
+                        <button className="btn btn-secondary" onClick={handleTodoCancel}>
+                          Mégse
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h5 className="card-title mb-3">{todo.title}</h5>
+                      <div className="text-end">
+                        <button className="btn btn-primary me-2" onClick={() => handleTodoEdit(todo)}>
+                          Szerkesztés
+                        </button>
+                        <button className="btn btn-danger" onClick={() => handleTodoDelete(todo)}>
+                          Törlés
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
